@@ -26,3 +26,16 @@ persp_jk(x = NULL, y = NULL, z, colormap = viridisLite::viridis(256),
 \description{
 Plot 3d surfaces, similar to matlab surf function
 }
+\examples{
+data(ari)
+persp_jk(z = ari)
+
+## changing parameters
+x <- seq(1,50,1)
+y <- seq(1,20,1)
+data(parula64)
+persp_jk(x,y,ari,colormap = parula64,xlab = "t", ylab= "K neighbors",zlab = "Adjusted Rand Index",legend=F)
+
+## changing border color
+persp_jk(x,y,ari,colormap = viridisLite::viridis(64,option = "A"),xlab = "t", ylab= "K neighbors",zlab = "Adjusted Rand Index", border = "white")
+}

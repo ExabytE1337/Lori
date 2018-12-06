@@ -6,6 +6,8 @@
 \alias{Lori-package}
 \title{Lori: Personal library of useful functions}
 \description{
-Personal library of useful functions. Use with care.
+\if{html}{\figure{logo.png}{options: align='right'}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec laoreet mauris, condimentum luctus ligula.Suspendisse ullamcorper, justo et eleifend convallis, nulla est efficitur massa, ac rutrum eros dui eu lacus.Cras placerat mattis tellus, at pharetra velit placerat vitae.Fusce rutrum placerat risus auctor laoreet. Donec a nunc ut nibhrhoncus accumsan non eu elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.Interdum et malesuada fames ac ante ipsum primis in faucibus.
 }
 \keyword{internal}

@@ -4,14 +4,17 @@
 \alias{plot_svm_jk}
 \title{Plot the decision boundary of SVM model with 2 features}
 \usage{
-plot_svm_jk(df, xvar = "x1", yvar = "x2", grid = 50,
-  clab = "label", svm_model = NULL, tolerance = 0.005,
-  color = c("#56b4e9", "#e69f00", "black"), plot_grid = F,
-  plot_1 = F, fill_plot = F, fillmap = pals::ocean.curl(30),
-  bins = 10, contour_color = "white", longer_legend = T)
+plot_svm_jk(df, svm_model = NULL, xvar = colnames(df)[1],
+  yvar = colnames(df)[2], grid = 50, clab = colnames(df)[3],
+  tolerance = 0.005, color = c("#56b4e9", "#e69f00", "black"),
+  plot_grid = T, plot_contour = T, fill_plot = F,
+  fillmap = pals::ocean.curl(30), bins = 10, contour_color = "white",
+  longer_legend = T, add_title = T)
 }
 \arguments{
 \item{df}{The data to be displayed in this layer.}
+
+\item{svm_model}{svm model from library e1071 or kernlab}
 
 \item{xvar}{Name of the variable in dataframe df to be used in ploting as x-axis.}
 
@@ -21,13 +24,13 @@ plot_svm_jk(df, xvar = "x1", yvar = "x2", grid = 50,
 
 \item{clab}{Label name for the datapoints.}
 
-\item{svm_model}{svm model from library e1071 or kernlab}
-
 \item{tolerance}{when ploting the contours for the decision function f(x) = +-1, how close need the points to be to that line in order to be highlighted.}
 
 \item{color}{3 color vector. First two colors used for datapoints, third one used for the contours.}
 
-\item{plot_grid}{should the grid be plotted. Default value is FALSE.}
+\item{plot_grid}{should the grid be plotted. Default value is TRUE.}
+
+\item{plot_contour}{should the contour for f(x) = +-1 be plotted. Default value is TRUE.}
 
 \item{fill_plot}{should the plot be filled according to distance to the decision boundary. Classes have different shape. Filled shape means the point is a support vector. Default value is FALSE.}
 
@@ -39,8 +42,17 @@ plot_svm_jk(df, xvar = "x1", yvar = "x2", grid = 50,
 
 \item{longer_legend}{should the legend be as long as the plot. Default value is TRUE.}
 
-\item{plot_contour}{should the contour for f(x) = +-1 be plotted. Default value is FALSE.}
+\item{add_title}{should the title be added. Default value is TRUE.}
 }
 \description{
 Plot the decision boundary of SVM model with 2 features
+}
+\examples{
+data(df)
+library(e1071)
+model <- svm(label ~ x1 + x2, data = df, kernel = "radial", gamma = 1, scale = F, cost = 1.8)
+plot_svm_jk(df,model)
+
+## filled plot
+plot_svm_jk(df,model,fill_plot = T)
 }
