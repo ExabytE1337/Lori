@@ -9,6 +9,18 @@
 #' @param legend should the legend be drawn. The default is TRUE.
 #' @import fields
 #' @export
+#' @examples
+#' data(ari)
+#' persp_jk(z = ari)
+#'
+#' ## changing parameters
+#' x <- seq(1,50,1)
+#' y <- seq(1,20,1)
+#' data(parula64)
+#' persp_jk(x,y,ari,colormap = parula64,xlab = "t", ylab= "K neighbors",zlab = "Adjusted Rand Index",legend=F)
+#'
+#' ## changing border color
+#' persp_jk(x,y,ari,colormap = viridisLite::viridis(64,option = "A"),xlab = "t", ylab= "K neighbors",zlab = "Adjusted Rand Index", border = "white")
 persp_jk <- function(x = NULL,y = NULL,z,colormap = viridisLite::viridis(256),theta = -30,phi = 30,
                      expand = 0.5,ticktype = 'detailed',legend = T,...){
   if(is.null(x)) x <- seq(1,dim(ari)[1],1)
