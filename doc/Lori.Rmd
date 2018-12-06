@@ -1,0 +1,38 @@
+---
+title: "Lori"
+author: "Jakub Kovac"
+date: "`r Sys.time()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Put the title of your vignette here}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(dev='svg')
+```
+```{r results='hide', message=FALSE, warning=FALSE}
+library(Lori)
+```
+## ggraph_jk()
+Let's start with plotting the undiricted graph with edges colored according to their value.
+```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=8}
+data(spiraly)
+data(Wfull)
+ggraph_jk(data = spiraly,matrix_g = Wfull,colormap = colormap::colormap(colormap = "hot", n = 256),cex_p = 1.5)
+```
+The function exports the graph so we can use additional manipulations.  Let's look at the nodes colored by their degree (number of edges they are connected to).
+
+```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=7}
+g <- ggraph_jk(data = spiraly, matrix_g = Wfull, color = "degree",cex_p = 3)
+g + theme(legend.position = c(0.9,0.2),legend.background=element_blank())
+```
+
+We can also color the nodes based on the sum of all weights of edges connected to them. matlab = T changes the theme and default colors a bit.
+
+```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=7}
+g <- ggraph_jk(data = spiraly, matrix_g = Wfull, color = "wdegree",cex_p = 3,matlab = T,color_lines = "black")
+g + theme(legend.position = c(0.9,0.2),legend.background=element_blank())
+```
