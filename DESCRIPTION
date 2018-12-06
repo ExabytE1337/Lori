@@ -1,12 +1,24 @@
 Package: Lori
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Personal library of useful functions
 Version: 0.1.0
-Author: Who wrote it
+Author: Jakub Kovac
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Description: Personal library of useful functions. Use with care.
+License: WTFPL (Do What the Fuck You Want To Public License)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Imports:
+	Matrix,
+	dplyr,
+	ggplot2,
+	viridisLite,
+	fields,
+	e1071,
+	pals,
+	tidyr
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
