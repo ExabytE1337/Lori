@@ -1,29 +1,42 @@
 #' Plot undirected graphs constructed from 2D data
 #'
 #' @param data The data to be displayed in this layer.
-#' @param matrix_g Matrix of edges in calculated graph. Could be a full matrix or sparse from the Matrix package.
+#' @param matrix_g Matrix of edges in calculated graph. Could be a full matrix
+#'   or sparse from the Matrix package.
 #' @param x Name of the first coordinate.
 #' @param y Name of the second coordinate.
-#' @param label Name of the column coresponding to ground truth in clustering. Could be omitted.
+#' @param label Name of the column coresponding to ground truth in clustering.
+#'   Could be omitted.
 #' @param colormap Colormap to color the vertices/edges of a graph.
 #' @param colormap Colormap to color the vertices/edges of a graph.
-#' @param color A string indicating of what to color, using a colormap. Four options available: "none", "edge", "degree" and "wdegree". Degree uses colormap to color points based on the number of edges going to/from the given vertex. Wdegree calculates the sum of weights of edges in each vertex.
+#' @param color A string indicating of what to color, using a colormap. Four
+#'   options available: "none", "edge", "degree" and "wdegree". Degree uses
+#'   colormap to color points based on the number of edges going to/from the
+#'   given vertex. Wdegree calculates the sum of weights of edges in each
+#'   vertex.
 #' @param plot_points boolean. Should we plot the vertices?
 #' @param color_points The chosen color for coloring points.
 #' @param color_lines The chosen color for coloring edges.
 #' @param cex_p Change the size of points.
 #' @param size Change the width of edges.
-#' @param matlab boolean. Should we use default MATLAB colors and try to replicate the ggplot theme?
+#' @param matlab boolean. Should we use default MATLAB colors and try to
+#'   replicate the ggplot theme?
+#' @import Matrix
+#' @import dplyr
+#' @import ggplot2
+#' @import viridisLite
+#' @import tidyr
+#' @import pals
+#' @export
 ggraph_jk <- function(data = NULL, matrix_g = NULL,x = colnames(data)[1],
                       y = colnames(data)[2],label = colnames(data)[3],
-                      colormap = viridisLite::viridis(256),
+                      colormap = NULL,
                       color = "edge", plot_points = T, color_points = NULL,
-                      color_lines = NULL,cex_p = 1,size = 0.5, matlab = F){
+                      color_lines = NULL,cex_p = 3,size = 0.5, matlab = F){
   # Load required packages ---------------------------
   require(Matrix)
   require(ggplot2)
   require(dplyr)
-  require(viridisLite)
   # Load matlab colors ---------------------------
   matlab_rgb_farby <- matrix(c(0,0.4470,0.7410,0.8500,0.3250,0.0980,0.9290,
                                0.6940,0.1250,0.4940,0.1840,0.5560,0.4660,0.6740,
@@ -50,8 +63,10 @@ ggraph_jk <- function(data = NULL, matrix_g = NULL,x = colnames(data)[1],
   if(matlab){
     if(is.null(color_points)) color_points <- "#D95319"
     if(is.null(color_lines)) color_lines <- "#0072BD"
+    if(is.null(colormap)) colormap <- pals::parula(256)
     g <- g + matlab_theme
   }
+  if(is.null(colormap)) colormap <- viridisLite::viridis(256)
   if(is.null(color_points)) color_points <- "black"
   if(is.null(color_lines)) color_lines <- "black"
   if (color != "none"){
