@@ -9,7 +9,7 @@ plot_svm_jk(df, svm_model = NULL, xvar = colnames(df)[1],
   tolerance = 0.005, color = c("#56b4e9", "#e69f00", "black"),
   plot_grid = T, plot_contour = T, fill_plot = F,
   fillmap = pals::ocean.curl(30), bins = 10, contour_color = "white",
-  longer_legend = T, add_title = T)
+  longer_legend = T, add_title = T, surface_plot = F, ...)
 }
 \arguments{
 \item{df}{The data to be displayed in this layer.}
@@ -43,6 +43,10 @@ plot_svm_jk(df, svm_model = NULL, xvar = colnames(df)[1],
 \item{longer_legend}{should the legend be as long as the plot. Default value is TRUE.}
 
 \item{add_title}{should the title be added. Default value is TRUE.}
+
+\item{surface_plot}{should we plot the "decision" function f(x): R^2 -> R. Default value is FALSE.}
+
+\item{...}{additional paramaters when calling the persp_jk function.}
 }
 \description{
 Plot the decision boundary of SVM model with 2 features
@@ -55,4 +59,7 @@ plot_svm_jk(df,model)
 
 ## filled plot
 plot_svm_jk(df,model,fill_plot = T)
+
+## surface plot
+plot_svm_jk(df,model,surface_plot = T, theta = 260)
 }
