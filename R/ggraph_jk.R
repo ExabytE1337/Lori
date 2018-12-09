@@ -21,12 +21,11 @@
 #' @param size Change the width of edges.
 #' @param matlab boolean. Should we use default MATLAB colors and try to
 #'   replicate the ggplot theme?
-#' @import Matrix
 #' @import dplyr
 #' @import ggplot2
-#' @import viridisLite
 #' @import tidyr
 #' @import pals
+#' @import Matrix
 #' @export
 #' @examples
 #' ## Edge coloring
@@ -49,9 +48,7 @@ ggraph_jk <- function(data = NULL, matrix_g = NULL,x = colnames(data)[1],
                       color = "edge", plot_points = T, color_points = NULL,
                       color_lines = NULL,cex_p = 3,size = 0.5, matlab = F){
   # Load required packages ---------------------------
-  require(Matrix)
   require(ggplot2)
-  require(dplyr)
   # Load matlab colors ---------------------------
   matlab_rgb_farby <- matrix(c(0,0.4470,0.7410,0.8500,0.3250,0.0980,0.9290,
                                0.6940,0.1250,0.4940,0.1840,0.5560,0.4660,0.6740,
@@ -64,7 +61,7 @@ ggraph_jk <- function(data = NULL, matrix_g = NULL,x = colnames(data)[1],
                         axis.ticks.x.top = element_line(colour = "black"))
   # Check for sparsity of the graph ---------------------------
   sparse <- is(matrix_g,'sparseMatrix')
-  if(!sparse) Wsparse <- Matrix(matrix_g,sparse = T)
+  if(!sparse) Wsparse <- Matrix::Matrix(matrix_g,sparse = T)
   else Wsparse <- matrix_g
   W_df <- as_tibble(summary(Wsparse))
   colnames(W_df) <- c("i","j","value")
@@ -81,7 +78,7 @@ ggraph_jk <- function(data = NULL, matrix_g = NULL,x = colnames(data)[1],
     if(is.null(colormap)) colormap <- pals::parula(256)
     g <- g + matlab_theme
   }
-  if(is.null(colormap)) colormap <- viridisLite::viridis(256)
+  if(is.null(colormap)) colormap <- pals::viridis(256)
   if(is.null(color_points)) color_points <- "black"
   if(is.null(color_lines)) color_lines <- "black"
   if (color != "none"){

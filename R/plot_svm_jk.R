@@ -39,9 +39,6 @@ plot_svm_jk <- function(df, svm_model = NULL, xvar = colnames(df)[1], yvar = col
                         plot_contour = T, fill_plot = F, fillmap = pals::ocean.curl(30),
                         bins = 10, contour_color = "white",longer_legend = T, add_title = T,
                         surface_plot = F,...){
-  require(ggplot2)
-  require(dplyr)
-  require(pals)
   e1071 <- typeof(svm_model)!="S4"
   xr <- seq(min(df[xvar]),max(df[xvar]),length = grid)
   xr <- c(2*xr[1]-xr[2],xr,xr[length(xr)]+xr[2]-xr[1])
