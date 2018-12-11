@@ -15,14 +15,20 @@ knitr::opts_chunk$set(dev='svg')
 ```
 ```{r results='hide', message=FALSE, warning=FALSE}
 library(Lori)
+library(tidyverse)
+library(e1071)
+library(kernlab)
 ```
+
 ## ggraph_jk()
 Let's start with plotting the undiricted graph with edges colored according to their value.
+
 ```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=8}
 data(spiraly)
 data(Wfull)
 ggraph_jk(data = spiraly,matrix_g = Wfull,colormap = colormap::colormap(colormap = "hot", n = 256),cex_p = 1.5)
 ```
+
 The function exports the graph so we can use additional manipulations.  Let's look at the nodes colored by their degree (number of edges they are connected to).
 
 ```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=7}
@@ -36,3 +42,47 @@ We can also color the nodes based on the sum of all weights of edges connected t
 g <- ggraph_jk(data = spiraly, matrix_g = Wfull, color = "wdegree",cex_p = 3,matlab = T,color_lines = "black")
 g + theme(legend.position = c(0.9,0.2),legend.background=element_blank())
 ```
+
+## plot_svm_jk()
+This function started as way to replicate the figure 12.3 from Elements of Statistical Learning. We are going to use the actual training data from the book, but we don't know all the parameters used in Kernel SVM.
+
+```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=7}
+data(df)
+model <- svm(label ~ x1 + x2, data = df, kernel = "radial", gamma = 1, scale = F, cost = 1.8)
+plot_svm_jk(df,model, title = "SVM - Radial Kernel in Feature Space")
+```
+
+Then we wanted to recreate plot.svm() function used for ploting ksvm model kernlab library. For clarification lets look at the original plot first.
+
+```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=7}
+model_k <- ksvm(label ~ x2 + x1, data =df,scaled = F, C = 1.8, kpar = list(sigma = 1)) 
+plot(model_k, data = df)
+```
+
+Now the ggplot version used in our plot_svm_jk() function with a different colormap. It can also be used on e1071 model.
+
+```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=7}
+plot_svm_jk(df,model_k,fill_plot = T, bins =20)
+```
+
+We can also use this function to visualize the decision function f(x) in the whole feature space. This uses the persp_jk() function internally.
+
+```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=8}
+plot_svm_jk(df,model,surface_plot = T, theta = 300,colormap = viridisLite::viridis(64,option = "A"))
+```
+
+## persp_jk()
+It's not as easy to create 3D graphics in R (if you don't want use the plotly library) as it is in MATLAB. For noninteractive graphics, the persp function is really close to what I would like to have, however it lacks nice defaults. That's why I made the persp_jk() function. Let's look at this.
+
+```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=8}
+data(ari)
+persp_jk(z = ari)
+```
+
+It's easy to recreate MATLAB like plots.
+
+```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=8}
+data(parula64)
+persp_jk(z = ari,colormap = parula64,xlab = "t", ylab= "K neighbors",zlab = "Adjusted Rand Index",legend=F)
+```
+

@@ -32,16 +32,13 @@
 #' plot_svm_jk(df,model,fill_plot = T)
 #'
 #' ## surface plot
-#' plot_svm_jk(df,model,surface_plot = T, theta = 260)
+#' plot_svm_jk(df,model,surface_plot = T, theta = 300)
 plot_svm_jk <- function(df, svm_model = NULL, xvar = colnames(df)[1], yvar = colnames(df)[2],grid = 50,
                         clab = colnames(df)[3], tolerance = 0.005,
                         color = c("#56b4e9","#e69f00","black"),plot_grid = T,
                         plot_contour = T, fill_plot = F, fillmap = pals::ocean.curl(30),
                         bins = 10, contour_color = "white",longer_legend = T, add_title = T,
-                        surface_plot = F,...){
-  require(ggplot2)
-  require(dplyr)
-  require(pals)
+                        surface_plot = F,title = "SVM - Visualization",...){
   e1071 <- typeof(svm_model)!="S4"
   xr <- seq(min(df[xvar]),max(df[xvar]),length = grid)
   xr <- c(2*xr[1]-xr[2],xr,xr[length(xr)]+xr[2]-xr[1])
@@ -68,7 +65,7 @@ plot_svm_jk <- function(df, svm_model = NULL, xvar = colnames(df)[1], yvar = col
                                    axis.text = element_blank(),
                                    plot.title = element_text(hjust = 0.5),
                                    legend.position = "none")
-      g <- g + ggtitle("SVM - Visualization")
+      g <- g + ggtitle(title)
       if (plot_grid) g <- g + geom_point(data = grid_points, aes(x = x1, y = x2, color = label),cex = 0.3)
       g <- g + geom_point(shape = 1,cex = 3,stroke = 1.5)
       g <- g + geom_contour(data = grid_points, aes( x = x1,y = x2, z = f), cex =1,breaks = 0, color = color[3])
@@ -95,7 +92,7 @@ plot_svm_jk <- function(df, svm_model = NULL, xvar = colnames(df)[1], yvar = col
       # df2$label_model <- predict(svm_model)
       # df2$label_interaction <- interaction(df2$label,df2$label_model)
       df2$sv <- F
-      shapes <- c(17,2,1,16)
+      shapes <- c(2,17,1,16)
       if(e1071 == T) svectors <- as.numeric(rownames(model$SV))
       else svectors <- SVindex(model_k)
       df2$sv[svectors] <- T
@@ -103,7 +100,7 @@ plot_svm_jk <- function(df, svm_model = NULL, xvar = colnames(df)[1], yvar = col
       g <- g + geom_contour(bins = bins,col = contour_color,alpha = 0.2)
       g <- g + geom_point(data = df2,aes(x1,x2,shape = sv_class),show.legend = F) +
         scale_shape_manual(values=shapes)
-      g <- g + ggtitle("SVM - Visualization") + theme(plot.title = element_text(hjust = 0.5))
+      g <- g + ggtitle(title) + theme(plot.title = element_text(hjust = 0.5))
       g
     }
   }
