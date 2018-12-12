@@ -7,7 +7,7 @@
 #' @param path Path used to get the .jpg picture. Before running this function you can run file.choose() function to get the desired path.
 #' @param k Desired number of colors in a palette.
 #' @param plot_image Should the original image be plotted. The default value is FALSE.
-#' @param algoritm Two methods are implemented. The currently available are "agnes" and "kmeans". /n The default is "agnes".
+#' @param algorithm Two methods are implemented. The currently available are "agnes" and "kmeans". /n The default is "agnes".
 #' @param grid The size of grid used for pixel sampling.
 #' @param linkage Link used in hierarchical clustering. Default is "single".
 #' @import jpeg
