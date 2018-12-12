@@ -5,6 +5,7 @@
 #' @param k number of clusters.
 #' @param fun function used on grouped data. Perhaps it makes sense to use different functions than mean. Median might be a good choice. Input should be character.
 #' @import rlang
+#' @import pals
 #' @import dplyr
 #' @export
 #' @examples
@@ -13,9 +14,9 @@
 #' colours <- tree2color(tree, k = 10)
 #' plot_colours(colours)
 #'
-#'  ## or use something like this
-#'  color_list <- purrr::map(1:10,~tree2color(tree,.x))
-#'  do.call(pals::pal.bands,color_list)
+#' ## or use something like this
+#' color_list <- purrr::map(1:10,~tree2color(tree,.x))
+#' do.call(pals::pal.bands,color_list)
 tree2color <- function(tree_model,k = 3, fun = "mean"){
   tree <- tree_model[[1]]
   pixels <- tree_model[[2]]

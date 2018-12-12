@@ -5,7 +5,7 @@
 \title{Pick color palette from a picture}
 \usage{
 pick_palette_jk(path = NULL, k = 3, plot_image = F,
-  algorithm = "agnes", grid = 50, full_object = T)
+  algorithm = "agnes", grid = 200, full_object = T)
 }
 \arguments{
 \item{path}{Path used to get the .jpg picture. Before running this function you can run file.choose() function to get the desired path.}

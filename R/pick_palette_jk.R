@@ -9,6 +9,7 @@
 #' @param plot_image Should the original image be plotted. The default value is FALSE.
 #' @param algoritm Two methods are implemented. The currently available are "agnes" and "kmeans". /n The default is "agnes".
 #' @param grid The size of grid used for pixel sampling.
+#' @param linkage Link used in hierarchical clustering. Default is "single".
 #' @import jpeg
 #' @import tibble
 #' @import dplyr
@@ -16,15 +17,18 @@
 #' @export
 #' @examples
 #' path <- "./man/figures/duck.jpg"
-#' tree <- pick_palette_jk(path)
+#' tree <- pick_palette_jk(path) #keep in mind this can take up to 5 mins
 #' colours <- tree2color(tree, k = 10)
 #' plot_colours(colours)
 #'
-#'  ## or use something like this
-#'  color_list <- purrr::map(1:10,~tree2color(tree,.x))
-#'  do.call(pals::pal.bands,color_list)
-pick_palette_jk <- function(path = NULL, k = 3, plot_image = F, algorithm = "agnes", grid = 50,full_object = T){
-  img <- readJPEG(path)
+#' ## or use something like this
+#' color_list <- purrr::map(1:10,~tree2color(tree,.x))
+#' do.call(pals::pal.bands,color_list)
+#' #compare this with
+#' plot_colours(rgb(pick_palette_jk(path,algorithm = "kmeans",k = 10)))
+#' #hierarchical clustering has great potential but is really slow compared to kmeans
+pick_palette_jk <- function(path = NULL, k = 3, plot_image = F, algorithm = "agnes", grid = 60, full_object = T, linkage = "single"){
+  img <- jpeg::readJPEG(path)
   if(plot_image){
     res = dim(img)[2:1]
     plot(1,1,xlim=c(1,res[1]),ylim=c(1,res[2]),asp=1,type='n',xaxs='i',yaxs='i',xaxt='n',yaxt='n',xlab='',ylab='',bty='n')
@@ -40,9 +44,10 @@ pick_palette_jk <- function(path = NULL, k = 3, plot_image = F, algorithm = "agn
   if(algorithm == "kmeans"){
     kmeans_obj <- kmeans(pixels[,3:5],k)
     vysledok <- kmeans_obj$centers
+    return(rgb(vysledok))
   }
   if(algorithm == "agnes"){
-    tree <- cluster::agnes(pixels[,3:5])
+    tree <- cluster::agnes(pixels[,3:5], method = linkage)
     if(!full_object){
       ind <- cutree(tree, k = k)
       pixels$label <- ind
