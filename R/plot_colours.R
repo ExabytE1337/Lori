@@ -1,3 +1,5 @@
+#' Plot a vector of hex colours.
+#'
 #' This function is from some other package, I don't know where it's from. But it's super helpful.
 #' @param colour_vector vector of colors to plot.
 #' @export

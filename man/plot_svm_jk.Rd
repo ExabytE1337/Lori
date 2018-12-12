@@ -9,7 +9,8 @@ plot_svm_jk(df, svm_model = NULL, xvar = colnames(df)[1],
   tolerance = 0.005, color = c("#56b4e9", "#e69f00", "black"),
   plot_grid = T, plot_contour = T, fill_plot = F,
   fillmap = pals::ocean.curl(30), bins = 10, contour_color = "white",
-  longer_legend = T, add_title = T, surface_plot = F, ...)
+  longer_legend = T, add_title = T, surface_plot = F,
+  title = "SVM - Visualization", ...)
 }
 \arguments{
 \item{df}{The data to be displayed in this layer.}
@@ -61,5 +62,5 @@ plot_svm_jk(df,model)
 plot_svm_jk(df,model,fill_plot = T)
 
 ## surface plot
-plot_svm_jk(df,model,surface_plot = T, theta = 260)
+plot_svm_jk(df,model,surface_plot = T, theta = 300)
 }
