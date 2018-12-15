@@ -5,7 +5,8 @@
 \title{Pick color palette from a picture}
 \usage{
 pick_palette_jk(path = NULL, k = 3, plot_image = F,
-  algorithm = "agnes", grid = 200, full_object = T)
+  algorithm = "agnes", grid = 60, full_object = T,
+  linkage = "single")
 }
 \arguments{
 \item{path}{Path used to get the .jpg picture. Before running this function you can run file.choose() function to get the desired path.}
@@ -14,9 +15,11 @@ pick_palette_jk(path = NULL, k = 3, plot_image = F,
 
 \item{plot_image}{Should the original image be plotted. The default value is FALSE.}
 
+\item{algorithm}{Two methods are implemented. The currently available are "agnes" and "kmeans". /n The default is "agnes".}
+
 \item{grid}{The size of grid used for pixel sampling.}
 
-\item{algoritm}{Two methods are implemented. The currently available are "agnes" and "kmeans". /n The default is "agnes".}
+\item{linkage}{Link used in hierarchical clustering. Default is "single".}
 }
 \description{
 This function uses clustering on a subset of pixels from given picture. The final output is mean of pixels in each cluster converted to hex.
@@ -26,11 +29,14 @@ However if you choose the kmeans algorithm, you can only get one vector of color
 }
 \examples{
 path <- "./man/figures/duck.jpg"
-tree <- pick_palette_jk(path)
+tree <- pick_palette_jk(path) #keep in mind this can take up to 5 mins
 colours <- tree2color(tree, k = 10)
 plot_colours(colours)
 
- ## or use something like this
- color_list <- purrr::map(1:10,~tree2color(tree,.x))
- do.call(pals::pal.bands,color_list)
+## or use something like this
+color_list <- purrr::map(1:10,~tree2color(tree,.x))
+do.call(pals::pal.bands,color_list)
+#compare this with
+plot_colours(rgb(pick_palette_jk(path,algorithm = "kmeans",k = 10)))
+#hierarchical clustering has great potential but is really slow compared to kmeans
 }
