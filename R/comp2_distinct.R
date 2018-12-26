@@ -3,6 +3,7 @@
 #' @import tibble
 #' @import dplyr
 #' @import crayon
+#' @export
 comp2_distinct <- function(data = NULL, g_by = NULL, distinct = F){
   if(distinct) df <- data %>% distinct
   else df <- data

@@ -2,6 +2,7 @@
 #'
 #' @import compare
 #' @import tibble
+#' @export
 comp_jk <- function(df = NULL,var = NULL){
   if(nrow(df)>2) cat("too many rows: ",nrow(df),"\n")
   a <- compare(df[1,],df[2,])
