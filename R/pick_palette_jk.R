@@ -7,9 +7,10 @@
 #' @param path Path used to get the .jpg picture. Before running this function you can run file.choose() function to get the desired path.
 #' @param k Desired number of colors in a palette.
 #' @param plot_image Should the original image be plotted. The default value is FALSE.
-#' @param algorithm Two methods are implemented. The currently available are "agnes" and "kmeans". /n The default is "agnes".
+#' @param algorithm Two methods are implemented. The currently available are "agnes", "diana" and "kmeans". The default is "agnes".
 #' @param grid The size of grid used for pixel sampling.
 #' @param linkage Link used in hierarchical clustering. Default is "single".
+#' @param kmax Maximal k wanted in the tree while using diana.
 #' @import jpeg
 #' @import tibble
 #' @import dplyr
@@ -21,13 +22,19 @@
 #' colours <- tree2color(tree, k = 10)
 #' plot_colours(colours)
 #'
+#' ## using diana
+#' tree <- pick_palette_jk(path,algorithm = "diana")
+#' tree2color(tree, k = 10) %>% sort_colours %>% plot_colours
+#'
 #' ## or use something like this
 #' color_list <- purrr::map(1:10,~tree2color(tree,.x))
 #' do.call(pals::pal.bands,color_list)
 #' #compare this with
 #' plot_colours(rgb(pick_palette_jk(path,algorithm = "kmeans",k = 10)))
 #' #hierarchical clustering has great potential but is really slow compared to kmeans
-pick_palette_jk <- function(path = NULL, k = 3, plot_image = F, algorithm = "agnes", grid = 60, full_object = T, linkage = "single"){
+#'
+#'
+pick_palette_jk <- function(path = NULL, k = 3, plot_image = F, algorithm = "agnes", grid = 60, full_object = T, linkage = "single", kmax = 10){
   img <- jpeg::readJPEG(path)
   if(plot_image){
     res = dim(img)[2:1]
@@ -45,6 +52,23 @@ pick_palette_jk <- function(path = NULL, k = 3, plot_image = F, algorithm = "agn
     kmeans_obj <- kmeans(pixels[,3:5],k)
     vysledok <- kmeans_obj$centers
     return(rgb(vysledok))
+  }
+  if(algorithm == "diana"){
+    n_rows <- nrow(pixels[,3:5])
+    tree <- cluster::diana(pixels[,3:5],stop.at.k = kmax, keep.data = F, keep.dis = F)
+    if(!full_object){
+      ind <- cutree(tree, k = k)
+      pixels$label <- ind
+      vysledok <-
+        pixels %>%
+        group_by(label) %>%
+        summarise( avg_r = mean(r),avg_g = mean(g),avg_b = mean(b)) %>%
+        select(-1)
+      return(rgb(vysledok))
+    }
+    else {
+      return(list(tree,pixels))
+    }
   }
   if(algorithm == "agnes"){
     tree <- cluster::agnes(pixels[,3:5], method = linkage)

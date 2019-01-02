@@ -6,7 +6,7 @@
 \usage{
 pick_palette_jk(path = NULL, k = 3, plot_image = F,
   algorithm = "agnes", grid = 60, full_object = T,
-  linkage = "single")
+  linkage = "single", kmax = 10)
 }
 \arguments{
 \item{path}{Path used to get the .jpg picture. Before running this function you can run file.choose() function to get the desired path.}
@@ -15,11 +15,13 @@ pick_palette_jk(path = NULL, k = 3, plot_image = F,
 
 \item{plot_image}{Should the original image be plotted. The default value is FALSE.}
 
-\item{algorithm}{Two methods are implemented. The currently available are "agnes" and "kmeans". /n The default is "agnes".}
+\item{algorithm}{Two methods are implemented. The currently available are "agnes", "diana" and "kmeans". The default is "agnes".}
 
 \item{grid}{The size of grid used for pixel sampling.}
 
 \item{linkage}{Link used in hierarchical clustering. Default is "single".}
+
+\item{kmax}{Maximal k wanted in the tree while using diana.}
 }
 \description{
 This function uses clustering on a subset of pixels from given picture. The final output is mean of pixels in each cluster converted to hex.
@@ -33,10 +35,16 @@ tree <- pick_palette_jk(path) #keep in mind this can take up to 5 mins
 colours <- tree2color(tree, k = 10)
 plot_colours(colours)
 
+## using diana
+tree <- pick_palette_jk(path,algorithm = "diana")
+tree2color(tree, k = 10) \%>\% sort_colours \%>\% plot_colours
+
 ## or use something like this
 color_list <- purrr::map(1:10,~tree2color(tree,.x))
 do.call(pals::pal.bands,color_list)
 #compare this with
 plot_colours(rgb(pick_palette_jk(path,algorithm = "kmeans",k = 10)))
 #hierarchical clustering has great potential but is really slow compared to kmeans
+
+
 }
