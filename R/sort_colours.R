@@ -6,6 +6,7 @@
 #' Then we apply pca retaining only 1 componen and sort it.
 #' @param col color vector in hex format
 #' @param method only "PCA_HSV" is implemented
+#' @export
 sort_colours <- function(col = NULL, method = "PCA_HSV"){
   color <- col2rgb(col)
   #color <- rgb2hsl(col)

@@ -14,10 +14,10 @@
 #'
 #' ## splitting into 3 graphs
 #' ggplot_missing(airquality,T,2)
-ggplot_missing <- function(x, split = F, by = 25){
-  if(split){
-    cat("Producing",ncol(x)%/%by + !((ncol(x)%%by) == 0)," missmap graphs. \n")
-    lapply(split_by_ncol(x,by),basic_miss_plot)
-  }
-  else basic_miss_plot(x)
+ggplot_missing <- function(x, split = F, by = 25,...){
+   if(split){
+     cat("Producing",ncol(x)%/%by + !((ncol(x)%%by) == 0)," missmap graphs. \n")
+     lapply(split_by_ncol(x,by),basic_miss_plot, ...)
+   }
+   else basic_miss_plot(x,...)
 }
