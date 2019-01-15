@@ -83,7 +83,7 @@ pick_palette_jk <- function(path = NULL, k = 3, plot_image = F, algorithm = "agn
       return(rgb(vysledok))
     }
     else {
-      return(list(tree,pixels))
+      return(list(tree = tree, pixels = pixels))
     }
   }
 }
