@@ -1,3 +1,3 @@
 # Lori
-"#846437","#003F5C","#D6CBB9","#1A1C1F","#F0B51E"
+c("#003F5C","#F0B51E","#846437","#D6CBB9","#1A1C1F")
 ![](lori_r_package.svg)
