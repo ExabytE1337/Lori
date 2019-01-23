@@ -4,7 +4,7 @@
 \alias{ggplot_missing}
 \title{Function to plot missing map}
 \usage{
-ggplot_missing(x, split = F, by = 25)
+ggplot_missing(x, split = F, by = 25, ...)
 }
 \arguments{
 \item{x}{should be a dataframe. As of now it is not being checked so use with care.}

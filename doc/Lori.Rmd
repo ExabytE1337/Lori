@@ -13,11 +13,21 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(dev='svg')
 ```
+
 ```{r results='hide', message=FALSE, warning=FALSE}
 library(Lori)
 library(tidyverse)
 library(e1071)
 library(kernlab)
+library(gridExtra)
+```
+
+```{r}
+# lori_pal()
+p1 <- lori_pal(1) %>% plot_colours()
+p2 <- lori_pal(2) %>% plot_colours()
+p3 <- lori_pal(3) %>% plot_colours()
+grid.arrange(p1, p2, p3, nrow = 1)
 ```
 
 ## ggraph_jk()
@@ -33,14 +43,14 @@ The function exports the graph so we can use additional manipulations.  Let's lo
 
 ```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=7}
 g <- ggraph_jk(data = spiraly, matrix_g = Wfull, color = "degree",cex_p = 3)
-g + theme(legend.position = c(0.9,0.2),legend.background=element_blank())
+g + ggplot2::theme(legend.position = c(0.9,0.2),legend.background=element_blank())
 ```
 
 We can also color the nodes based on the sum of all weights of edges connected to them. matlab = T changes the theme and default colors a bit.
 
 ```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=7}
 g <- ggraph_jk(data = spiraly, matrix_g = Wfull, color = "wdegree",cex_p = 3,matlab = T,color_lines = "black")
-g + theme(legend.position = c(0.9,0.2),legend.background=element_blank())
+g + ggplot2::theme(legend.position = c(0.9,0.2),legend.background=element_blank())
 ```
 
 ## plot_svm_jk()

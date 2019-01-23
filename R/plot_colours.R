@@ -3,6 +3,7 @@
 #' This function is from some other package, I don't know where it's from. But it's super helpful.
 #' @param colour_vector vector of colors to plot.
 #' @export
+#' @import ggplot2
 #' @examples
 #' m <- matlab_pal()
 #' plot_colours(m)
@@ -17,7 +18,7 @@ plot_colours <- function(colour_vector,names = T, background_colour = 'white') {
   g <- ggplot(colour_df, aes_string(x = factor(1), y = 'Colours', fill = 'Colours'))+
     geom_tile() +
     scale_fill_manual(values=levels(colour_df$Colours), guide='none') +
-    theme(axis.title=element_blank(),
+    ggplot2::theme(axis.title=element_blank(),
           axis.text=element_blank(),
           axis.line=element_blank(),
           axis.ticks=element_blank(),

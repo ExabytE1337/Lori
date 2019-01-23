@@ -1,5 +1,14 @@
-#' Default matlab palette.
+#' Default Lori palettes
+#'
+#' @param pal choose wanted palette. So far only 5 ale implemented.
 #' @export
+#' @examples
+#' lori_pal(1)
+#' plot_colours(lori_pal(1))
+#'
+#' library(gridExtra)
+#' g <- purrr::map(1:6,~plot_colours(lori_pal(.x)))
+#' do.call("gridExtra::grid.arrange", c(g, nrow=1))
 lori_pal <- function(pal = 1){
   output_pal <- NULL
   # to make this nice I won't be using if/else
@@ -17,6 +26,18 @@ lori_pal <- function(pal = 1){
 
   if(pal == 3){
     output_pal <- c("#3abba7","#f5ca48","#fd5b59","#333333")
+  }
+
+  if(pal == 4){
+    output_pal <- c("#cc3366","#ffcccc","#6699cc","#66cccc")
+  }
+
+  if(pal == 5){
+    output_pal <- c("#bf7b9d","#c11269","#b86634","#de8c40","#9c0724","#7b1c22")
+  }
+
+  if(pal == 6){
+    output_pal <- c("#0394c9","#03305a","#2253bc","#047273","#73c022")
   }
   return(output_pal)
 }
