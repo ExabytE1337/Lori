@@ -23,8 +23,8 @@
 #' persp_jk(x,y,ari,colormap = viridisLite::viridis(64,option = "A"),xlab = "t", ylab= "K neighbors",zlab = "Adjusted Rand Index", border = "white")
 persp_jk <- function(x = NULL,y = NULL,z,colormap = viridisLite::viridis(256),theta = -30,phi = 30,
                      expand = 0.5,ticktype = 'detailed',legend = T,...){
-  if(is.null(x)) x <- seq(1,dim(ari)[1],1)
-  if(is.null(y)) y <- seq(1,dim(ari)[2],1)
+  if(is.null(x)) x <- seq(1,dim(z)[1],1)
+  if(is.null(y)) y <- seq(1,dim(z)[2],1)
   zfacet <- z[-dim(z)[1],-dim(z)[2]]
   facetcol <- cut(zfacet,length(colormap))
   v <- persp(x,y,z,col = colormap[facetcol],theta = theta,phi = phi,
