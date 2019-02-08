@@ -22,12 +22,12 @@ library(kernlab)
 library(gridExtra)
 ```
 
-```{r}
-# lori_pal()
-p1 <- lori_pal(1) %>% plot_colours()
-p2 <- lori_pal(2) %>% plot_colours()
-p3 <- lori_pal(3) %>% plot_colours()
-grid.arrange(p1, p2, p3, nrow = 1)
+## lori_pal()
+
+```{r fig.height = 6, fig.width=8}
+
+g <- purrr::map(1:6,~plot_colours(lori_pal(.x)))
+do.call("grid.arrange", c(g, nrow=1))
 ```
 
 ## ggraph_jk()

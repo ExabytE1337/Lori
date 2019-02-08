@@ -7,8 +7,16 @@
 lori_pal(pal = 1)
 }
 \arguments{
-\item{pal}{choose wanted palette. So far only 3 ale implemented. 1 implies the default matlab palette. 2 and 3 are specific to this package.}
+\item{pal}{choose wanted palette. So far only 5 ale implemented.}
 }
 \description{
 Default Lori palettes
+}
+\examples{
+lori_pal(1)
+plot_colours(lori_pal(1))
+
+library(gridExtra)
+g <- purrr::map(1:6,~plot_colours(lori_pal(.x)))
+do.call("gridExtra::grid.arrange", c(g, nrow=1))
 }

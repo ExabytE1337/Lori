@@ -38,4 +38,8 @@ persp_jk(x,y,ari,colormap = parula64,xlab = "t", ylab= "K neighbors",zlab = "Adj
 
 ## changing border color
 persp_jk(x,y,ari,colormap = viridisLite::viridis(64,option = "A"),xlab = "t", ylab= "K neighbors",zlab = "Adjusted Rand Index", border = "white")
+
+require(ambient)
+set.seed(4425346)
+persp_jk(z = noise_simplex(c(100,100)))
 }
