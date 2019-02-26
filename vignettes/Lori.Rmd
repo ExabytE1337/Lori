@@ -16,7 +16,7 @@ knitr::opts_chunk$set(dev='svg')
 
 ```{r results='hide', message=FALSE, warning=FALSE}
 library(Lori)
-library(ggplot)
+library(ggplot2)
 library(tidyverse)
 library(e1071)
 library(kernlab)
@@ -73,13 +73,13 @@ plot(model_k, data = df)
 Now the ggplot version used in our plot_svm_jk() function with a different colormap. It can also be used on e1071 model.
 
 ```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=7}
-plot_svm_jk(df,model_k,fill_plot = T, bins =20)
+#plot_svm_jk(df,model_k,fill_plot = T, bins =20)
 ```
 
 We can also use this function to visualize the decision function f(x) in the whole feature space. This uses the persp_jk() function internally.
 
 ```{r message=FALSE, warning=FALSE, fig.height = 6, fig.width=8}
-plot_svm_jk(df,model,surface_plot = T, theta = 300,colormap = viridisLite::viridis(64,option = "A"))
+#plot_svm_jk(df,model,surface_plot = T, theta = 300,colormap = viridisLite::viridis(64,option = "A"))
 ```
 
 ## persp_jk()

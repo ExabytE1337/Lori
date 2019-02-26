@@ -53,12 +53,7 @@ plot_svm_jk <- function(df, svm_model = NULL, grid = 50, tolerance = 0.005,
   grid_points <- as_tibble(expand.grid(xr,yr))
   colnames(grid_points) <- c(xvar,yvar)
   grid_points$label <- predict(svm_model,grid_points)
-  if(e1071 == T) grid_points$f <- as.vector(attr(predict(svm_model,grid_points,decision.values = T),
-<<<<<<< HEAD
-                                                 "decision.values"))
-=======
-                                       "decision.values"))
->>>>>>> 676f18145fc2389a2e661500dab47b6478e2c54f
+  if(e1071 == T) grid_points$f <- as.vector(attr(predict(svm_model,grid_points,decision.values = T),"decision.values"))
   else grid_points$f <- predict(svm_model,grid_points, type = "decision")
   if (surface_plot){
     z <- matrix(grid_points$f,byrow = F,nrow = length(xr))
@@ -79,7 +74,6 @@ plot_svm_jk <- function(df, svm_model = NULL, grid = 50, tolerance = 0.005,
 
       g <- g + ggtitle(title)
       if (plot_grid) g <- g + geom_point(data = grid_points, aes_string(x = xvar, y = yvar, color = "label"),cex = 0.3)
-<<<<<<< HEAD
 
       g <- g + geom_contour(data = grid_points, aes_string( x = xvar,y = yvar, z = "f"), cex =1,breaks = 0, color = color[3])
       if(plot_contour) g <- g + geom_contour(data = grid_points, aes_string( x = xvar,y = yvar, z = "f"),
@@ -94,7 +88,6 @@ plot_svm_jk <- function(df, svm_model = NULL, grid = 50, tolerance = 0.005,
       abs_max <- max(abs(grid_points$f))
       g <- ggplot(data = grid_points,aes_string(xvar,yvar,z = "f")) + geom_raster(interpolate = T,aes(fill = f))+
         scale_fill_gradientn(colours = fillmap, limits = c(-abs_max,abs_max))+theme_bw()
-=======
       g <- g + geom_point(shape = 1,cex = 3,stroke = 1.5)
       g <- g + geom_contour(data = grid_points, aes_string( x = xvar,y = yvar, z = "f"), cex =1,breaks = 0, color = color[3])
       if(plot_contour) g <- g + geom_contour(data = grid_points, aes_string( x = xvar,y = yvar, z = "f"),
@@ -103,37 +96,18 @@ plot_svm_jk <- function(df, svm_model = NULL, grid = 50, tolerance = 0.005,
       g <- g + geom_point(data = df[original_points,],aes_string(x = xvar, y = yvar), color = color[3],cex = 3)
       g
     }
-    else{#fill_plot==T
-      g <- ggplot(data = grid_points,aes_string(xvar,yvar,z = "f")) + geom_raster(interpolate = T,aes(fill = f))+
-        scale_fill_gradientn(colours = fillmap)+theme_bw()
->>>>>>> 676f18145fc2389a2e661500dab47b6478e2c54f
-      g <- g + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank())
-      g <- g + scale_y_continuous(expand=c(0, 0)) + scale_x_continuous(expand=c(0, 0)) +
-        theme(legend.title=element_blank(),legend.text=element_text(size=12))
-      if(longer_legend){
-        #fix according to https://stackoverflow.com/questions/19214914/how-can-i-make-the-legend-in-ggplot2-the-same-height-as-my-plot
-        panel_height <- unit(1,"npc") - sum(ggplotGrob(g)[["heights"]][-3]) - unit(1,"line")
-        g <- g + guides(fill= guide_colorbar(barheight = panel_height))
-      }
-<<<<<<< HEAD
-      if(subtitle) g <- g + labs(subtitle = "f(x) - projection of feature space onto decision hyperplane")
-      if(plot_data){
-        df2 <- df
-        df2$f <- NA
-        # later on we can add the ability to assign shapes according to the true and predicted classes
-        # df2$label_model <- predict(svm_model)
-        # df2$label_interaction <- interaction(df2$label,df2$label_model)
-        df2$sv <- F
-        shapes <- c(2,17,1,16)
-        if(e1071 == T) svectors <- as.numeric(rownames(model$SV))
-        else svectors <- SVindex(svm_model)
-        df2$sv[svectors] <- T
-        df2$sv_class <- interaction(df2$sv,df2[[clab]])
-        g <- g + geom_point(data = df2,aes_string(xvar,yvar,shape = "sv_class"),show.legend = F) +
-          scale_shape_manual(values=shapes)
-      }
-      g <- g + geom_contour(bins = bins,col = contour_color,alpha = 0.2)
-=======
+    g <- ggplot(data = grid_points,aes_string(xvar,yvar,z = "f")) + geom_raster(interpolate = T,aes(fill = f))+
+      scale_fill_gradientn(colours = fillmap)+theme_bw()
+    g <- g + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank())
+    g <- g + scale_y_continuous(expand=c(0, 0)) + scale_x_continuous(expand=c(0, 0)) +
+      theme(legend.title=element_blank(),legend.text=element_text(size=12))
+    if(longer_legend){
+      #fix according to https://stackoverflow.com/questions/19214914/how-can-i-make-the-legend-in-ggplot2-the-same-height-as-my-plot
+      panel_height <- unit(1,"npc") - sum(ggplotGrob(g)[["heights"]][-3]) - unit(1,"line")
+      g <- g + guides(fill= guide_colorbar(barheight = panel_height))
+    }
+    if(subtitle) g <- g + labs(subtitle = "f(x) - projection of feature space onto decision hyperplane")
+    if(plot_data){
       df2 <- df
       df2$f <- NA
       # later on we can add the ability to assign shapes according to the true and predicted classes
@@ -145,12 +119,25 @@ plot_svm_jk <- function(df, svm_model = NULL, grid = 50, tolerance = 0.005,
       else svectors <- SVindex(svm_model)
       df2$sv[svectors] <- T
       df2$sv_class <- interaction(df2$sv,df2[[clab]])
-      g <- g + geom_contour(bins = bins,col = contour_color,alpha = 0.2)
       g <- g + geom_point(data = df2,aes_string(xvar,yvar,shape = "sv_class"),show.legend = F) +
         scale_shape_manual(values=shapes)
->>>>>>> 676f18145fc2389a2e661500dab47b6478e2c54f
-      g <- g + ggtitle(title) + theme(plot.title = element_text(hjust = 0.5))
     }
+    g <- g + geom_contour(bins = bins,col = contour_color,alpha = 0.2)
+    df2 <- df
+    df2$f <- NA
+    # later on we can add the ability to assign shapes according to the true and predicted classes
+    # df2$label_model <- predict(svm_model)
+    # df2$label_interaction <- interaction(df2$label,df2$label_model)
+    df2$sv <- F
+    shapes <- c(2,17,1,16)
+    if(e1071 == T) svectors <- as.numeric(rownames(model$SV))
+    else svectors <- SVindex(svm_model)
+    df2$sv[svectors] <- T
+    df2$sv_class <- interaction(df2$sv,df2[[clab]])
+    g <- g + geom_contour(bins = bins,col = contour_color,alpha = 0.2)
+    g <- g + geom_point(data = df2,aes_string(xvar,yvar,shape = "sv_class"),show.legend = F) +
+      scale_shape_manual(values=shapes)
+    g <- g + ggtitle(title) + theme(plot.title = element_text(hjust = 0.5))
   }
   g <- g + theme(legend.text.align = 1)
   return(g)

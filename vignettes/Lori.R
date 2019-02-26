@@ -4,6 +4,7 @@ knitr::opts_chunk$set(dev='svg')
 
 ## ----results='hide', message=FALSE, warning=FALSE------------------------
 library(Lori)
+library(ggplot2)
 library(tidyverse)
 library(e1071)
 library(kernlab)
@@ -39,10 +40,10 @@ model_k <- ksvm(label ~ x2 + x1, data =df,scaled = F, C = 1.8, kpar = list(sigma
 plot(model_k, data = df)
 
 ## ----message=FALSE, warning=FALSE, fig.height = 6, fig.width=7-----------
-plot_svm_jk(df,model_k,fill_plot = T, bins =20)
+#plot_svm_jk(df,model_k,fill_plot = T, bins =20)
 
 ## ----message=FALSE, warning=FALSE, fig.height = 6, fig.width=8-----------
-plot_svm_jk(df,model,surface_plot = T, theta = 300,colormap = viridisLite::viridis(64,option = "A"))
+#plot_svm_jk(df,model,surface_plot = T, theta = 300,colormap = viridisLite::viridis(64,option = "A"))
 
 ## ----message=FALSE, warning=FALSE, fig.height = 6, fig.width=8-----------
 data(ari)
