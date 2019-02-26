@@ -47,8 +47,8 @@ plot_svm_jk <- function(df, svm_model = NULL, xvar = colnames(df)[1], yvar = col
   grid_points <- as_tibble(expand.grid(xr,yr))
   colnames(grid_points) <- c(xvar,yvar)
   grid_points$label <- predict(svm_model,grid_points)
-  if(e1071 == T) grid_points$f <- attr(predict(svm_model,grid_points,decision.values = T),
-                                       "decision.values")
+  if(e1071 == T) grid_points$f <- as.vector(attr(predict(svm_model,grid_points,decision.values = T),
+                                       "decision.values"))
   else grid_points$f <- predict(svm_model,grid_points, type = "decision")
   if (surface_plot){
     z <- matrix(grid_points$f,byrow = F,nrow = length(xr))
@@ -66,17 +66,17 @@ plot_svm_jk <- function(df, svm_model = NULL, xvar = colnames(df)[1], yvar = col
                                    plot.title = element_text(hjust = 0.5),
                                    legend.position = "none")
       g <- g + ggtitle(title)
-      if (plot_grid) g <- g + geom_point(data = grid_points, aes(x = x1, y = x2, color = label),cex = 0.3)
+      if (plot_grid) g <- g + geom_point(data = grid_points, aes_string(x = xvar, y = yvar, color = "label"),cex = 0.3)
       g <- g + geom_point(shape = 1,cex = 3,stroke = 1.5)
-      g <- g + geom_contour(data = grid_points, aes( x = x1,y = x2, z = f), cex =1,breaks = 0, color = color[3])
-      if(plot_contour) g <- g + geom_contour(data = grid_points, aes( x = x1,y = x2, z = f),
+      g <- g + geom_contour(data = grid_points, aes_string( x = xvar,y = yvar, z = "f"), cex =1,breaks = 0, color = color[3])
+      if(plot_contour) g <- g + geom_contour(data = grid_points, aes_string( x = xvar,y = yvar, z = "f"),
                                              cex =0.5,breaks = c(-1,1), color = color[3],lty = "dashed")
-      original_points <- (near(model$decision.values,1,tol = tolerance) | near(model$decision.values,-1,tol = tolerance))
-      g <- g + geom_point(data = df[original_points,],aes(x = x1, y = x2), color = color[3],cex = 3)
+      original_points <- (near(svm_model$decision.values,1,tol = tolerance) | near(svm_model$decision.values,-1,tol = tolerance))
+      g <- g + geom_point(data = df[original_points,],aes_string(x = xvar, y = yvar), color = color[3],cex = 3)
       g
     }
     else{#fill_plot==T
-      g <- ggplot(data = grid_points,aes(x1,x2,z = f)) + geom_raster(interpolate = T,aes(fill = f))+
+      g <- ggplot(data = grid_points,aes_string(xvar,yvar,z = "f")) + geom_raster(interpolate = T,aes(fill = f))+
         scale_fill_gradientn(colours = fillmap)+theme_bw()
       g <- g + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank())
       g <- g + scale_y_continuous(expand=c(0, 0)) + scale_x_continuous(expand=c(0, 0)) +
@@ -94,11 +94,11 @@ plot_svm_jk <- function(df, svm_model = NULL, xvar = colnames(df)[1], yvar = col
       df2$sv <- F
       shapes <- c(2,17,1,16)
       if(e1071 == T) svectors <- as.numeric(rownames(model$SV))
-      else svectors <- SVindex(model_k)
+      else svectors <- SVindex(svm_model)
       df2$sv[svectors] <- T
-      df2$sv_class <- interaction(df2$sv,df2$label)
+      df2$sv_class <- interaction(df2$sv,df2[[clab]])
       g <- g + geom_contour(bins = bins,col = contour_color,alpha = 0.2)
-      g <- g + geom_point(data = df2,aes(x1,x2,shape = sv_class),show.legend = F) +
+      g <- g + geom_point(data = df2,aes_string(xvar,yvar,shape = "sv_class"),show.legend = F) +
         scale_shape_manual(values=shapes)
       g <- g + ggtitle(title) + theme(plot.title = element_text(hjust = 0.5))
       g
