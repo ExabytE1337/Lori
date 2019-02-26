@@ -23,5 +23,5 @@ data("airquality")
 ggplot_missing(airquality)
 
 ## splitting into 3 graphs
-ggplot_missing(airquality,T,2)
+ggplot_missing(airquality,split = TRUE, by = 2)
 }

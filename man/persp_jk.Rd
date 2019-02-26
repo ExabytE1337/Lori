@@ -39,7 +39,10 @@ persp_jk(x,y,ari,colormap = parula64,xlab = "t", ylab= "K neighbors",zlab = "Adj
 ## changing border color
 persp_jk(x,y,ari,colormap = viridisLite::viridis(64,option = "A"),xlab = "t", ylab= "K neighbors",zlab = "Adjusted Rand Index", border = "white")
 
+## generating terrain
 require(ambient)
+require(scico)
 set.seed(4425346)
-persp_jk(z = noise_simplex(c(100,100)))
+terrain <- noise_simplex(c(100,100))
+persp_jk(z = terrain, colormap = scico(256, palette = "vik"), border = "NA", legend = F)
 }

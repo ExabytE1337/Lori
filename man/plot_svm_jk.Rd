@@ -4,26 +4,19 @@
 \alias{plot_svm_jk}
 \title{Plot the decision boundary of SVM model with 2 features}
 \usage{
-plot_svm_jk(df, svm_model = NULL, xvar = colnames(df)[1],
-  yvar = colnames(df)[2], grid = 50, clab = colnames(df)[3],
-  tolerance = 0.005, color = c("#56b4e9", "#e69f00", "black"),
-  plot_grid = T, plot_contour = T, fill_plot = F,
-  fillmap = pals::ocean.curl(30), bins = 10, contour_color = "white",
-  longer_legend = T, add_title = T, surface_plot = F,
-  title = "SVM - Visualization", ...)
+plot_svm_jk(df, svm_model = NULL, grid = 50, tolerance = 0.005,
+  color = c("#56b4e9", "#e69f00", "black"), plot_grid = T,
+  plot_contour = T, fill_plot = F, fillmap = pals::ocean.curl(30),
+  bins = 10, contour_color = "white", longer_legend = T,
+  add_title = T, surface_plot = F, title = "SVM - Visualization",
+  plot_data = T, ESL_theme = F, subtitle = T, ...)
 }
 \arguments{
 \item{df}{The data to be displayed in this layer.}
 
 \item{svm_model}{svm model from library e1071 or kernlab}
 
-\item{xvar}{Name of the variable in dataframe df to be used in ploting as x-axis.}
-
-\item{yvar}{Name of the variable in dataframe df to be used in ploting as y-axis.}
-
 \item{grid}{Size of the grid used for sampling the space. We have to evaluate the decision function f(x) in each point.}
-
-\item{clab}{Label name for the datapoints.}
 
 \item{tolerance}{when ploting the contours for the decision function f(x) = +-1, how close need the points to be to that line in order to be highlighted.}
 
@@ -46,6 +39,8 @@ plot_svm_jk(df, svm_model = NULL, xvar = colnames(df)[1],
 \item{add_title}{should the title be added. Default value is TRUE.}
 
 \item{surface_plot}{should we plot the "decision" function f(x): R^2 -> R. Default value is FALSE.}
+
+\item{plot_data}{should the original data be plotted? Default value is TRUE.}
 
 \item{...}{additional paramaters when calling the persp_jk function.}
 }

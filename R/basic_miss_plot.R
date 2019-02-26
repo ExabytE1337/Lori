@@ -15,5 +15,4 @@ basic_miss_plot <- function(x, col=NULL ,flip = F){
     labs(x = "Variables in Dataset", y = "Rows / observations")
   if(flip) g <- g + coord_flip()
   return(g)
-  #possible addition might be to allow user to use coord_flip()
 }

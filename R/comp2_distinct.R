@@ -1,5 +1,8 @@
 #' Compare 2-row grouped subsets of distinct dataframe
 #'
+#' @param data
+#' @param g_by
+#' @param distinct
 #' @import tibble
 #' @import dplyr
 #' @import crayon

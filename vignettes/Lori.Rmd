@@ -4,7 +4,7 @@ author: "Jakub Kovac"
 date: "`r Sys.time()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Put the title of your vignette here}
+  %\VignetteIndexEntry{Lori_vignette}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -16,6 +16,7 @@ knitr::opts_chunk$set(dev='svg')
 
 ```{r results='hide', message=FALSE, warning=FALSE}
 library(Lori)
+library(ggplot)
 library(tidyverse)
 library(e1071)
 library(kernlab)
