@@ -97,7 +97,7 @@ plot_svm_jk <- function(df, svm_model = NULL, grid = 50, tolerance = 0.005,
         panel_height <- unit(1,"npc") - sum(ggplotGrob(g)[["heights"]][-3]) - unit(1,"line")
         g <- g + guides(fill= guide_colorbar(barheight = panel_height))
       }
-      if(subtitle) g <- g + labs(subtitle = "f(x) - projection of feature space onto decision hyperplane")
+      if(subtitle) g <- g + labs(subtitle = bquote(f(x): R^2 %->% R    ~ "signed distance of feature space to the decision hyperplane"))
       if(plot_data){
         df2 <- df
         df2$f <- NA
