@@ -6,10 +6,11 @@
 \usage{
 plot_svm_jk(df, svm_model = NULL, grid = 50, tolerance = 0.005,
   color = c("#56b4e9", "#e69f00", "black"), plot_grid = T,
-  plot_contour = T, fill_plot = F, fillmap = pals::ocean.curl(30),
-  bins = 10, contour_color = "white", longer_legend = T,
-  add_title = T, surface_plot = F, title = "SVM - Visualization",
-  plot_data = T, ESL_theme = F, subtitle = T, ...)
+  plot_contour = T, plot_decision = T, fill_plot = F,
+  fillmap = pals::ocean.curl(30), bins = 10, contour_color = "white",
+  longer_legend = T, add_title = T, surface_plot = F,
+  title = "SVM - Visualization", plot_data = T, ESL_theme = F,
+  subtitle = T, ...)
 }
 \arguments{
 \item{df}{The data to be displayed in this layer.}
@@ -24,7 +25,9 @@ plot_svm_jk(df, svm_model = NULL, grid = 50, tolerance = 0.005,
 
 \item{plot_grid}{should the grid be plotted. Default value is TRUE.}
 
-\item{plot_contour}{should the contour for f(x) = +-1 be plotted. Default value is TRUE.}
+\item{plot_contour}{should the contour for f(x) = +-1 be plotted. Default value is TRUE. This setting doesn't affect the contours for fill_plot.}
+
+\item{plot_decision}{should the decision boundary(the contour for f(x)=0) be plotted. Default value is TRUE.}
 
 \item{fill_plot}{should the plot be filled according to distance to the decision boundary. Classes have different shape. Filled shape means the point is a support vector. Default value is FALSE.}
 
@@ -40,7 +43,13 @@ plot_svm_jk(df, svm_model = NULL, grid = 50, tolerance = 0.005,
 
 \item{surface_plot}{should we plot the "decision" function f(x): R^2 -> R. Default value is FALSE.}
 
+\item{title}{string title for the plot.}
+
 \item{plot_data}{should the original data be plotted? Default value is TRUE.}
+
+\item{ESL_theme}{should x and y be without labels and ticks? Default value is FALSE.}
+
+\item{subtitle}{should default subtitle be added. Default value is TRUE.}
 
 \item{...}{additional paramaters when calling the persp_jk function.}
 }
@@ -51,10 +60,10 @@ Plot the decision boundary of SVM model with 2 features
 data(df)
 library(e1071)
 model <- svm(label ~ x1 + x2, data = df, kernel = "radial", gamma = 1, scale = F, cost = 1.8)
-plot_svm_jk(df,model)
+plot_svm_jk(df,model, ESL_theme = T)
 
 ## filled plot
-plot_svm_jk(df,model,fill_plot = T)
+plot_svm_jk(df,model,fill_plot = T, plot_contour = F, plot_decision = F)
 
 ## surface plot
 plot_svm_jk(df,model,surface_plot = T, theta = 300)
