@@ -41,7 +41,7 @@ plot_svm_jk <- function(df, svm_model = NULL, grid = 50, tolerance = 0.005,
                         bins = 10, contour_color = "white",longer_legend = T, add_title = T,
                         surface_plot = F,title = "SVM - Visualization",
                         plot_data = T, ESL_theme = F, subtitle = T, ...){
-
+  abs_max <- NULL
   e1071 <- typeof(svm_model)!="S4"
   if(e1071) variables <- as.character(attr(svm_model$terms,"variables"))[-1]
   else variables <- as.character(attr(svm_model@terms,"variables"))[-1]
@@ -126,5 +126,6 @@ plot_svm_jk <- function(df, svm_model = NULL, grid = 50, tolerance = 0.005,
                           cex =1,breaks = 0, color = color[3])
   }
   g <- g + theme(legend.text.align = 1)
+  g$s_lim_jk <- abs_max
   return(g)
 }
