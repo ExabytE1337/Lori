@@ -24,7 +24,6 @@
 #' @import dplyr
 #' @import pals
 #' @export
-#'
 #' @examples
 #' data(df)
 #' library(e1071)
