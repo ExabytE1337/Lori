@@ -1,4 +1,4 @@
-# Replace colors in SVM fill plot
+#' Replace colors in SVM fill plot
 #'
 #' @param g g should be an object output from `plot_svm_jk()`` where fill_plot = T. It's crucial that it's from that function because I embedded some information into the g$s_lim_jk.
 #' @param fillmap This should be a diverging color palette. Default is using just `scale_fill_gradient2()`
