@@ -1,4 +1,4 @@
-#' Metaprogramming function to return java code from rpart object
+#' Metaprogramming function to return R code from rpart object
 #'
 #' @param frame This should be rpart$frame that has been supplied by prepare_rpart4code.R
 #' @param f_depth Please don't change this. It's only meant to change itself during recursion.
