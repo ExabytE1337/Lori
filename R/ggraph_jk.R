@@ -25,7 +25,6 @@
 #' @import ggplot2
 #' @import tidyr
 #' @import pals
-#' @import Matrix
 #' @export
 #' @examples
 #' ## Edge coloring
@@ -61,7 +60,7 @@ ggraph_jk <- function(data = NULL, matrix_g = NULL,x = colnames(data)[1],
   sparse <- is(matrix_g,'sparseMatrix')
   if(!sparse) Wsparse <- Matrix::Matrix(matrix_g,sparse = T)
   else Wsparse <- matrix_g
-  W_df <- as_tibble(summary(Wsparse))
+  W_df <- as_tibble(Matrix::summary(Wsparse))
   colnames(W_df) <- c("i","j","value")
   # Find all the rows from data that need to be connected ---------------------------
   df_rows <- W_df %>% gather(link,row,-value,factor_key = T) %>% .$row

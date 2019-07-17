@@ -6,7 +6,6 @@
 #' @param x should be a dataframe. As of now it is not being checked so use with care.
 #' @param split should the dataframe be split into smaller chunks
 #' @param  by if split is TRUE we are splitting the dataframe into chunks with by number of columns
-#' @import reshape2
 #' @export
 #' @examples
 #' data("airquality")
