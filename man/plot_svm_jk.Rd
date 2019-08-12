@@ -7,7 +7,7 @@
 plot_svm_jk(df, svm_model = NULL, grid = 50, tolerance = 0.005,
   color = c("#56b4e9", "#e69f00", "black"), plot_grid = T,
   plot_contour = T, plot_decision = T, fill_plot = F,
-  fillmap = pals::ocean.curl(30), bins = 10, contour_color = "white",
+  fillmap = NULL, bins = 10, contour_color = "white",
   longer_legend = T, add_title = T, surface_plot = F,
   title = "SVM - Visualization", plot_data = T, ESL_theme = F,
   subtitle = T, ...)

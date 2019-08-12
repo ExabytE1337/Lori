@@ -37,10 +37,14 @@
 #' plot_svm_jk(df,model,surface_plot = T, theta = 300)
 plot_svm_jk <- function(df, svm_model = NULL, grid = 50, tolerance = 0.005,
                         color = c("#56b4e9","#e69f00","black"),plot_grid = T,
-                        plot_contour = T, plot_decision = T, fill_plot = F, fillmap = pals::ocean.curl(30),
+                        plot_contour = T, plot_decision = T, fill_plot = F, fillmap = NULL,
                         bins = 10, contour_color = "white",longer_legend = T, add_title = T,
                         surface_plot = F,title = "SVM - Visualization",
                         plot_data = T, ESL_theme = F, subtitle = T, ...){
+  if(is.null(fillmap)) fillmap <- c("#151D44", "#182D4D", "#1B3E56", "#1B4E60", "#185E6A", "#136E72", "#197F78", "#278E7D",
+                                    "#449C83", "#66AA88", "#85B695", "#A4C2A3", "#BFCFB7", "#D9DDCD", "#F1EDE6", "#F8EAE4",
+                                    "#EFD4C7", "#E8BFAC", "#E2A992", "#DC937E", "#D57D6C", "#CA6865", "#BF5460", "#AF4260",
+                                    "#9E3260", "#8C2460", "#761B5B", "#601554", "#4A1045", "#340D35")
   abs_max <- NULL
   e1071 <- typeof(svm_model)!="S4"
   if(e1071) variables <- as.character(attr(svm_model$terms,"variables"))[-1]
