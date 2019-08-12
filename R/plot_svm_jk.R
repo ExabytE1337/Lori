@@ -22,7 +22,6 @@
 #' @param ... additional paramaters when calling the persp_jk function.
 #' @import ggplot2
 #' @import dplyr
-#' @import pals
 #' @export
 #' @examples
 #' data(df)
