@@ -24,7 +24,6 @@
 #' @import dplyr
 #' @import ggplot2
 #' @import tidyr
-#' @import pals
 #' @export
 #' @examples
 #' ## Edge coloring
@@ -72,10 +71,17 @@ ggraph_jk <- function(data = NULL, matrix_g = NULL,x = colnames(data)[1],
   if(matlab){
     if(is.null(color_points)) color_points <- "#D95319"
     if(is.null(color_lines)) color_lines <- "#0072BD"
-    if(is.null(colormap)) colormap <- pals::parula(256)
+    if(is.null(colormap)) colormap <- c("#3E26A8", "#402AB4", "#422EC0", "#4432CB", "#4537D5", "#463CDE", "#4741E5", "#4747EB",
+                                        "#484DF0", "#4852F4", "#4758F8", "#465EFB", "#4563FD", "#4269FE", "#3E6FFF", "#3875FE",
+                                        "#327CFC", "#2F81FA", "#2E87F7", "#2D8CF3", "#2B91EF", "#2797EB", "#259BE8", "#23A0E5",
+                                        "#20A5E3", "#1CA9DF", "#18ADDB", "#12B1D6", "#08B5D0", "#01B8CA", "#02BAC3", "#0BBDBD",
+                                        "#19BFB6", "#24C1AE", "#2CC4A7", "#31C69F", "#37C897", "#3FCA8E", "#4ACB84", "#57CC7A",
+                                        "#64CD6F", "#72CD64", "#81CC59", "#8FCB4E", "#9DC943", "#ABC739", "#B9C431", "#C5C22A",
+                                        "#D1BF27", "#DCBD29", "#E6BB2D", "#F0BA36", "#F8BA3D", "#FEBE3C", "#FEC338", "#FEC934",
+                                        "#FCCF30", "#FAD62D", "#F7DC2A", "#F5E327", "#F5E924", "#F6EF20", "#F7F51B", "#F9FB15")
     g <- g + matlab_theme
   }
-  if(is.null(colormap)) colormap <- pals::viridis(256)
+  if(is.null(colormap)) colormap <- viridisLite::viridis(256)
   if(is.null(color_points)) color_points <- "black"
   if(is.null(color_lines)) color_lines <- "black"
   if (color != "none"){

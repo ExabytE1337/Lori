@@ -23,6 +23,7 @@ colours <- tree2color(tree, k = 10)
 plot_colours(colours)
 
 ## or use something like this
-color_list <- purrr::map(1:10,~tree2color(tree,.x))
-do.call(pals::pal.bands,color_list)
+# it is commented in order not to fail when pals is unable to install
+# color_list <- purrr::map(1:10,~tree2color(tree,.x))
+#do.call(pals::pal.bands,color_list)
 }

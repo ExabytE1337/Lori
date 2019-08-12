@@ -13,9 +13,9 @@ plot_colours(colour_vector, names = T, background_colour = "white")
 This function is from some other package, I don't know where it's from. But it's super helpful.
 }
 \examples{
-m <- matlab_pal()
+m <- lori_pal()
 plot_colours(m)
 
 ##
-plot_colours(pals::ocean.curl(1000),F)
+plot_colours(lori_pal(2),F)
 }

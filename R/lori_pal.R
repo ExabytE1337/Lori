@@ -39,5 +39,11 @@ lori_pal <- function(pal = 1){
   if(pal == 6){
     output_pal <- c("#0394c9","#03305a","#2253bc","#047273","#73c022")
   }
+
+  if(pal == 7){
+    output_pal <- c("#5e315b","#ba6156","#f2a65e","#ffe478","#cfff70",
+                    "#8fde5d","#3ca370","#3d6e70","#473b78","#4b5bab",
+                    "#4da6ff","#e36956","#ffb570","#ff9166","#b0305c","#73275c")
+  }
   return(output_pal)
 }

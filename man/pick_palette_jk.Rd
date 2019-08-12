@@ -41,7 +41,7 @@ tree2color(tree, k = 10) \%>\% sort_colours \%>\% plot_colours
 
 ## or use something like this
 color_list <- purrr::map(1:10,~tree2color(tree,.x))
-do.call(pals::pal.bands,color_list)
+# do.call(pals::pal.bands,color_list) # commented out in cas pals fails to install
 #compare this with
 plot_colours(rgb(pick_palette_jk(path,algorithm = "kmeans",k = 10)))
 #hierarchical clustering has great potential but is really slow compared to kmeans

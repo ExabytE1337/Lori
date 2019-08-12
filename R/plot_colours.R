@@ -5,11 +5,11 @@
 #' @export
 #' @import ggplot2
 #' @examples
-#' m <- matlab_pal()
+#' m <- lori_pal()
 #' plot_colours(m)
 #'
 #' ##
-#' plot_colours(pals::ocean.curl(1000),F)
+#' plot_colours(lori_pal(2),F)
 plot_colours <- function(colour_vector,names = T, background_colour = 'white') {
   if (length(colour_vector) < 1)
     stop('Need at least one colour to plot.')

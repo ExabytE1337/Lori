@@ -17,14 +17,14 @@ Imports:
   fields,
   e1071,
   tidyr,
-	gridExtra,
-	cluster,
-	compare,
-	crayon,
-	jpeg,
-	reshape2,
-	rlang,
-	tibble
+  gridExtra,
+  cluster,
+  compare,
+  crayon,
+  jpeg,
+  reshape2,
+  rlang,
+  tibble
 Suggests: 
     knitr,
     rmarkdown
