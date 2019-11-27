@@ -5,7 +5,7 @@
 #' @param f_row_order Please don't change this. It's only meant to change itself during recursion.
 #' @examples
 #' prepare_rpart4code(tree_2010_2015) %>% rpart2pseudo_code() %>% message()
-rpart2pseudo_code <- function(frame, f_depth = 1, f_row_order = 1, sep_char = " ", english_output = c("not-MCU","MCU")){
+rpart2pseudo_code <- function(frame, f_depth = 1, f_row_order = 1, sep_char = " ", english_output = c("0","1")){
   frame_subset_1 <-
     frame %>%
     filter(depth == f_depth, row_order >= f_row_order) %>%
