@@ -4,13 +4,28 @@
 \alias{plot_svm_jk}
 \title{Plot the decision boundary of SVM model with 2 features}
 \usage{
-plot_svm_jk(df, svm_model = NULL, grid = 50, tolerance = 0.005,
-  color = c("#56b4e9", "#e69f00", "black"), plot_grid = T,
-  plot_contour = T, plot_decision = T, fill_plot = F,
-  fillmap = NULL, bins = 10, contour_color = "white",
-  longer_legend = T, add_title = T, surface_plot = F,
-  title = "SVM - Visualization", plot_data = T, ESL_theme = F,
-  subtitle = T, ...)
+plot_svm_jk(
+  df,
+  svm_model = NULL,
+  grid = 50,
+  tolerance = 0.005,
+  color = c("#56b4e9", "#e69f00", "black"),
+  plot_grid = T,
+  plot_contour = T,
+  plot_decision = T,
+  fill_plot = F,
+  fillmap = NULL,
+  bins = 10,
+  contour_color = "white",
+  longer_legend = T,
+  add_title = T,
+  surface_plot = F,
+  title = "SVM - Visualization",
+  plot_data = T,
+  ESL_theme = F,
+  subtitle = T,
+  ...
+)
 }
 \arguments{
 \item{df}{The data to be displayed in this layer.}

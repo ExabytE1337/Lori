@@ -5,10 +5,10 @@ Version: 0.1.1
 Author: Jakub Kovac
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec laoreet mauris, condimentum luctus ligula.Suspendisse ullamcorper, justo et eleifend convallis, nulla est efficitur massa, ac rutrum eros dui eu lacus.Cras placerat mattis tellus, at pharetra velit placerat vitae.Fusce rutrum placerat risus auctor laoreet. Donec a nunc ut nibhrhoncus accumsan non eu elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.Interdum et malesuada fames ac ante ipsum primis in faucibus. 
-License: WTFPL (Do What the Fuck You Want To Public License)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Imports:
   Matrix,
   dplyr,

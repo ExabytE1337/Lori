@@ -4,9 +4,18 @@
 \alias{persp_jk}
 \title{Plot 3d surfaces, similar to matlab surf function}
 \usage{
-persp_jk(x = NULL, y = NULL, z, colormap = viridisLite::viridis(256),
-  theta = -30, phi = 30, expand = 0.5, ticktype = "detailed",
-  legend = T, ...)
+persp_jk(
+  x = NULL,
+  y = NULL,
+  z,
+  colormap = viridisLite::viridis(256),
+  theta = -30,
+  phi = 30,
+  expand = 0.5,
+  ticktype = "detailed",
+  legend = T,
+  ...
+)
 }
 \arguments{
 \item{x, y}{locations of grid lines at which the values in z are measured. These must be in ascending order. By default, equally spaced values from 0 to 1 are used. If x is a list, its components x$x and x$y are used for x and y, respectively.}

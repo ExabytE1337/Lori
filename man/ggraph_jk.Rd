@@ -4,10 +4,21 @@
 \alias{ggraph_jk}
 \title{Plot undirected graphs constructed from 2D data}
 \usage{
-ggraph_jk(data = NULL, matrix_g = NULL, x = colnames(data)[1],
-  y = colnames(data)[2], label = colnames(data)[3], colormap = NULL,
-  color = "edge", plot_points = T, color_points = NULL,
-  color_lines = NULL, cex_p = 3, size = 0.5, matlab = F)
+ggraph_jk(
+  data = NULL,
+  matrix_g = NULL,
+  x = colnames(data)[1],
+  y = colnames(data)[2],
+  label = colnames(data)[3],
+  colormap = NULL,
+  color = "edge",
+  plot_points = T,
+  color_points = NULL,
+  color_lines = NULL,
+  cex_p = 3,
+  size = 0.5,
+  matlab = F
+)
 }
 \arguments{
 \item{data}{The data to be displayed in this layer.}
@@ -42,8 +53,6 @@ vertex.}
 
 \item{matlab}{boolean. Should we use default MATLAB colors and try to
 replicate the ggplot theme?}
-
-\item{colormap}{Colormap to color the vertices/edges of a graph.}
 }
 \description{
 Plot undirected graphs constructed from 2D data

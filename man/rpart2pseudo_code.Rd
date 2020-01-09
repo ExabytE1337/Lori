@@ -4,8 +4,13 @@
 \alias{rpart2pseudo_code}
 \title{Metaprogramming function to return java code from rpart object}
 \usage{
-rpart2pseudo_code(frame, f_depth = 1, f_row_order = 1,
-  sep_char = " ", english_output = c("not-MCU", "MCU"))
+rpart2pseudo_code(
+  frame,
+  f_depth = 1,
+  f_row_order = 1,
+  sep_char = " ",
+  english_output = c("0", "1")
+)
 }
 \arguments{
 \item{frame}{This should be rpart$frame that has been supplied by prepare_rpart4code.R}
