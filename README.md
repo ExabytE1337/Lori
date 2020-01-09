@@ -20,6 +20,8 @@ You can install the development version of Lori from
 devtools::install_github("jakubkovac/Lori")
 ```
 
+## Useful color palettes
+
 ``` r
 Lori::list_plotter(Lori::lori_pal)
 ```
