@@ -29,12 +29,29 @@
 #' terrain <- noise_simplex(c(100,100))
 #' persp_jk(z = terrain, colormap = scico(256, palette = "vik"), border = "NA", legend = F)
 persp_jk <- function(x = NULL,y = NULL,z,colormap = viridisLite::viridis(256),theta = -30,phi = 30,
-                     expand = 0.5,ticktype = 'detailed',legend = T,...){
-  if(is.null(x)) x <- seq(1,dim(z)[1],1)
-  if(is.null(y)) y <- seq(1,dim(z)[2],1)
+                     expand = 0.5,ticktype = 'detailed',legend = T,sorted = F,xlab = "x", ylab = "y", zlab = "z", ...){
+  if("data.frame" %in% class(x)){
+    df <- x[,1:3]
+    x <- sort(unique(df[[1]]))
+    y <- sort(unique(df[[2]]))
+    cnames <- colnames(df)
+    if(!sorted){
+      df <- arrange(df,!!sym(cnames[[1]]), !!sym(cnames[[2]]))
+    }
+    if(xlab == "x"){
+      xlab <- cnames[1]
+      ylab <- cnames[2]
+      zlab <- cnames[3]
+    }
+    z <- matrix(data = df[[3]], nrow = length(x), ncol = length(y), byrow = TRUE)
+  }else{
+   if(is.null(x)) x <- seq(1,dim(z)[1],1)
+   if(is.null(y)) y <- seq(1,dim(z)[2],1) 
+  }
+  
   zfacet <- z[-dim(z)[1],-dim(z)[2]]
   facetcol <- cut(zfacet,length(colormap))
   v <- persp(x,y,z,col = colormap[facetcol],theta = theta,phi = phi,
-             ticktype = ticktype,expand = expand,...)
+             ticktype = ticktype,expand = expand,xlab = xlab,ylab = ylab,zlab = zlab, ...)
   if(legend) fields::image.plot(legend.only=T, zlim=range(zfacet), col=colormap,useRaster = F)
 }
